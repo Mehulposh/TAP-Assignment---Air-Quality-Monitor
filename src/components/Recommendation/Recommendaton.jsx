@@ -2,6 +2,7 @@ import { CheckCircle } from 'lucide-react'
 import React from 'react'
 
 const Recommendaton = ({recommendaton , isVisible}) => {
+  console.log(recommendaton);
   return (
     <div id='recommendations' className={`fade-in bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg transition-all duration-500
           ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}

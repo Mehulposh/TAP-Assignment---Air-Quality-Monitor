@@ -83,7 +83,7 @@ function App() {
           description = 'Air quality is unhealthy';
         }
 
-        setAirQuality({aqi: mockAQI, description: description});
+        setAirQuality({aqi: mockAQI, description: description, level: level});
 
         setWeather({
           temp: Math.floor(Math.random() * 20) + 30,
@@ -138,7 +138,7 @@ function App() {
           <Location  location={location}/>
           <ErrorMessage error={error}/>
 
-          <div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             <AQICard airQuality={airQuality} isVisible={visibleEle.has('aqi-card')}/>
             <WeatherCard  weather={weather} isVisible={visibleEle.has('weather-card')}/>
             <HealthCard airQuality={airQuality} isVisible={visibleEle.has('health-card')}/>

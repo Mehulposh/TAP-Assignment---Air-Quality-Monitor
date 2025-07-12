@@ -2,6 +2,7 @@ import {AlertCircle,AlertTriangle, CheckCircle } from 'lucide-react'
 import React from 'react'
 
 const HealthCard = ({airQuality, isVisible}) => {
+  console.log(airQuality);
   return (
     <div id='health-card' className={`fade-in bg-white/95 backdrop-blur-sm rounded-xl p-6 mb-5 shadow-lg transition-all duration-500 hover:transform hover:scale-105 ${
       isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
@@ -11,8 +12,12 @@ const HealthCard = ({airQuality, isVisible}) => {
         <h3 className='text-lg font-semibold text-gray-800'>
           Health Status
         </h3>
+        
       </div>
-      <div >
+      <p className='text-black font-bold text-md mt-3 '>
+          {airQuality.description}
+        </p>
+      <div className='mt-5 font-bold ' >
         {airQuality.level === 'good' && (
           <div className='flex items-center gap-2 text-green-600' >
             <CheckCircle className='w-5 h-5' />
