@@ -1,8 +1,28 @@
+import { CheckCircle } from 'lucide-react'
 import React from 'react'
 
-const Recommendaton = () => {
+const Recommendaton = ({recommendaton , isVisible}) => {
   return (
-    <div>Recommendaton</div>
+    <div className={`fade-in bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg transition-all duration-500
+          ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+      >
+      <h3 className='text-xl font-semibold text-shadow-gray-800 mb-4'>
+        💡 Task Recommendation 
+      </h3>
+      <ul className='space-y-3'>
+        {recommendaton.map((item,idx) => (
+          <li 
+            key={idx} 
+            className='flex items-start gap-3 text-gray-700'
+            >
+            <CheckCircle  className='w-5 h-5 text-green-500 mt-0.5 flex-shring-0'/>
+            <span>
+              {item}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 
