@@ -9,10 +9,10 @@ function App() {
   
 
   return (
-    <>
+    <div className="bg-blue-300 h-screen">
       <Header/>
       <ErrorMessage error={'true'} />
-    </>
+    </div>
   )
 }
 
