@@ -9,12 +9,14 @@ const useGeoLocation = () => {
   });
 
   const [error, setError] = useState(null);
+  
 
   useEffect(() => {
     if('geolocation' in navigator){
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const {latitude, longitude} = position.coords;
+          
           setLocation({
             lat: latitude,
             long: longitude,

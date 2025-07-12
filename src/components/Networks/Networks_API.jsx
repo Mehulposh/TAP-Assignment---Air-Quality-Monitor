@@ -7,8 +7,8 @@ const Networks_API = ({networkInfo}) => {
       <div>
         {networkInfo.online ? (
           <>
-            <Wifi className='w-5 h-5 text-green-500'/>
-            <span className='text-green-600'>
+            <Wifi className='w-5 h-5 text-green-800'/>
+            <span className='text-green-800'>
               Online
             </span>
           </>

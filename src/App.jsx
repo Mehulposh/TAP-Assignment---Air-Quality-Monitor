@@ -131,7 +131,7 @@ function App() {
 
 
   return (
-    <div className="bg-cyan-300 h-screen">
+    <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 text-white">
       <div className="container mx-auto px-4 py-8">
           <Header />
           <Network_API networkInfo={networkInfo} />

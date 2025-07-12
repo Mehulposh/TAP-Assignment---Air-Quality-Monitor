@@ -3,7 +3,7 @@ import React from 'react'
 
 const WeatherCard = ({weather, isVisible}) => {
   return (
-    <div id='weather-card' className={`fade-in bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-lg 
+    <div id='weather-card' className={`fade-in bg-white/95 backdrop-blur-sm rounded-xl mb-4 p-6 shadow-lg 
           transition-all duration-500 hover:transform hover:scale-105 
           ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
       >
