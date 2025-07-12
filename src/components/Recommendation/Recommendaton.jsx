@@ -3,7 +3,7 @@ import React from 'react'
 
 const Recommendaton = ({recommendaton , isVisible}) => {
   return (
-    <div className={`fade-in bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg transition-all duration-500
+    <div id='recommendations' className={`fade-in bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg transition-all duration-500
           ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
       >
       <h3 className='text-xl font-semibold text-shadow-gray-800 mb-4'>

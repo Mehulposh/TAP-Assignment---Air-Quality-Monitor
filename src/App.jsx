@@ -22,7 +22,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [recommendation, setRecommendation] = useState([]);
 
-  const Network_Info = useNetworkInfo();
+  const networkInfo = useNetworkInfo();
   const visibleEle = useIntersectionObserver();
   const {location , error} = useGeoLocation();
 
@@ -134,20 +134,20 @@ function App() {
     <div className="bg-cyan-300 h-screen">
       <div className="container mx-auto px-4 py-8">
           <Header />
-          <Network_API />
-          <Location />
+          <Network_API networkInfo={networkInfo} />
+          <Location  location={location}/>
           <ErrorMessage error={error}/>
 
           <div>
-            <AQICard />
-            <WeatherCard />
-            <HealthCard/>
+            <AQICard airQuality={airQuality} isVisible={visibleEle.has('aqi-card')}/>
+            <WeatherCard  weather={weather} isVisible={visibleEle.has('weather-card')}/>
+            <HealthCard airQuality={airQuality} isVisible={visibleEle.has('health-card')}/>
 
           </div>
 
-          <AQChart />
-          <Recommendation />
-          <Loader />
+          <AQChart chartData={chartData} isVisible={visibleEle.has('chart')}/>
+          <Recommendation recommendaton={recommendation} isVisible={visibleEle.has('recommendation')}/>
+          <Loader isLoading={isLoading}/>
       </div>
     </div>
   )

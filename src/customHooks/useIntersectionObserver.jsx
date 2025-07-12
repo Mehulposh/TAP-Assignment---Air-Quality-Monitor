@@ -17,7 +17,7 @@ const useIntersectionObserver = () => {
 
     elements.forEach(ele => {
       if(ele.id){
-        observerRef.current.observer(ele);
+        observerRef.current.observe(ele);
       }
     });
 

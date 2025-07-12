@@ -18,7 +18,7 @@ const AQChart = ({chartData, isVisible}) => {
       const chartWidth = width -2 * margin;
       const chartHeight = height - 2 * margin;
       const maxAQI = Math.max(...chartData.map(d => d.aqi));
-      const minAQI = Math.map(...chartData.map(d => d.aqi));
+      const minAQI = Math.min(...chartData.map(d => d.aqi));
       const range = maxAQI - minAQI || 1;
 
 
@@ -32,7 +32,7 @@ const AQChart = ({chartData, isVisible}) => {
 
       for(let i =0;i<= 5; i++){
         const y = margin + (1 * chartHeight/ 5);
-        ctx.brginPath();
+        ctx.beginPath();
         ctx.moveTo(margin, y);
         ctx.lineTo(width - margin, y);
         ctx.stroke();
@@ -41,7 +41,7 @@ const AQChart = ({chartData, isVisible}) => {
       //Draw chart line
       ctx.strokeStyle = '#4299e1';
       ctx.lineWidth = 3;
-      ctx.beinPath();
+      ctx.beginPath();
       chartData.forEach((point,idx) => {
         const x = margin + (idx * chartWidth / (chartData.length - 1));
         const y = margin + chartHeight - ((point.aqi - minAQI) / range) * chartHeight;
@@ -58,8 +58,8 @@ const AQChart = ({chartData, isVisible}) => {
       chartData.forEach((point,idx) => {
         const x = margin + (idx * chartWidth / (chartData.length - 1));
         const y = margin + chartHeight - ((point.aqi - minAQI) / range) * chartHeight;
-        ctx.beinPath();
-        ctx.arc(x,y,4.0,2 * Math.PI);
+        ctx.beginPath();
+        ctx.arc(x,y,4,0,2 * Math.PI);
         ctx.fill();
       });
 
@@ -88,7 +88,7 @@ const AQChart = ({chartData, isVisible}) => {
 
 
   return (
-    <div className= {`fade-in bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-lg mb-8 
+    <div id='chart' className= {`fade-in bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-lg mb-8 
           transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
       > 
       <h3 className='text-xl font-semibold text-gray-800 mb-4'>

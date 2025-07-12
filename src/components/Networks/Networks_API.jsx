@@ -1,4 +1,4 @@
-import { Wifi } from 'lucide-react';
+import { Wifi, WifiOff } from 'lucide-react';
 import React from 'react'
 
 const Networks_API = ({networkInfo}) => {
@@ -14,7 +14,7 @@ const Networks_API = ({networkInfo}) => {
           </>
         ) : (
           <>
-            <Wifi className='w-5 h-5 text-red-500'/>
+            <WifiOff className='w-5 h-5 text-red-500'/>
             <span className='text-red-600'>
               Offline
             </span>
