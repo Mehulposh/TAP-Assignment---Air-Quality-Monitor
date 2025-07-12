@@ -60,9 +60,69 @@ function App() {
   //Fetch air quality data
   const getAQI = useCallback(() => {
     BackgroundTaskScheduler(async () => {
-      
+      try {
+        //Mock data for demo
+        const mockAQI = Math.floor(Math.random() * 200 )+1;
+        let level, description;
+
+        if(mockAQI <= 50){
+          level = 'good';
+          description = 'Air quality is satisfactory';
+        }else if(mockAQI <= 100){
+          level = 'moderate';
+          description = 'Air quality is acceptable';
+        }else{
+          level = 'bad';
+          description = 'Air quality is unhealthy';
+        }
+
+        setAirQuality({aqi: mockAQI, description: description});
+
+        setWeather({
+          temp: Math.floor(Math.random() * 20) + 30,
+          humidity: Math.floor(Math.random() * 40) + 40,
+          windSpeed: Math.floor(Math.random() * 10) + 15
+        });
+
+        const newChartData = Array.from({length: 24}, (_ , i) => ({
+          hour: i,
+          aqi: Math.floor(Math.random() * 120) + 20
+        }));
+
+        setChartData(newChartData);
+
+        const newRecommendation = getRecommendation(mockAQI, level);
+        setRecommendation(newRecommendation);
+
+        setIsLoading(false);
+
+      } catch (error) {
+        console.error('Error fetching air quality data:', error);
+        alert('Failed to fetch environmental data. Please try again.');
+        setIsLoading(false);
+      }
     })
-  })
+  },[BackgroundTaskScheduler, location]);
+
+
+  //fetch data when location is available
+  useEffect(() => {
+    if(location.lat && location.long){
+      getAQI();
+    }
+  },[location, getAQI]);
+
+
+  //cleanup 
+  useEffect(() => {
+    return() => {
+      if(task_idRef.current){
+        cancelIdleCallback(task_idRef.current);
+      }
+    };
+  },[]);
+
+  
   return (
     <div className="bg-cyan-300 h-screen">
       <Header/>
