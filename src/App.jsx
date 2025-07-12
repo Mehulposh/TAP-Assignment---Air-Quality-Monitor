@@ -1,11 +1,18 @@
-import Header from "./components/Header/Header"
-
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { AlertTriangle, Wifi, WifiOff, MapPin, Wind, Thermometer, Droplets, Activity, CheckCircle, AlertCircle } from 'lucide-react';
+import { AlertTriangle, Wifi, WifiOff, MapPin, Wind, Thermometer, Droplets, Activity, CheckCircle, AlertCircle, Network } from 'lucide-react';
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import useNetworkInfo from './customHooks/useNetworkInfo';
 import useGeoLocation from './customHooks/useGeoLocation';
+import Header from './components/Header/Header';
 import useIntersectionObserver from './customHooks/useIntersectionObserver';
+import Network_API from './components/Networks/Networks_API';
+import Location from './components/Location/Location';
+import AQICard from './components/AQICard/AQICard';
+import WeatherCard from './components/WeatherCard/WeatherCard';
+import HealthCard from './components/HealthCard/HealthCard';
+import AQChart from './components/AQChart/AQChart';
+import Recommendation from './components/Recommendation/Recommendaton';
+import Loader from './components/Loader/Loader';
 
 
 function App() {
@@ -122,11 +129,26 @@ function App() {
     };
   },[]);
 
-  
+
   return (
     <div className="bg-cyan-300 h-screen">
-      <Header/>
-      <ErrorMessage error={'true'} />
+      <div className="container mx-auto px-4 py-8">
+          <Header />
+          <Network_API />
+          <Location />
+          <ErrorMessage error={error}/>
+
+          <div>
+            <AQICard />
+            <WeatherCard />
+            <HealthCard/>
+
+          </div>
+
+          <AQChart />
+          <Recommendation />
+          <Loader />
+      </div>
     </div>
   )
 }
