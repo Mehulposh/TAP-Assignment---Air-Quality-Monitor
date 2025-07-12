@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { AlertTriangle, Wifi, WifiOff, MapPin, Wind, Thermometer, Droplets, Activity, CheckCircle, AlertCircle, Network } from 'lucide-react';
+import { getAirQuality, getWeatherData } from './api/api';
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import useNetworkInfo from './customHooks/useNetworkInfo';
 import useGeoLocation from './customHooks/useGeoLocation';
@@ -25,6 +25,7 @@ function App() {
   const networkInfo = useNetworkInfo();
   const visibleEle = useIntersectionObserver();
   const {location , error} = useGeoLocation();
+  console.log(location);
 
   const task_idRef = useRef(null);
 
@@ -69,13 +70,14 @@ function App() {
     BackgroundTaskScheduler(async () => {
       try {
         //Mock data for demo
-        const mockAQI = Math.floor(Math.random() * 200 )+1;
+        const CurrAQI = await getAirQuality(location.long,location.lat);
+        const weatherData = await getWeatherData(location.long,location.lat);
         let level, description;
 
-        if(mockAQI <= 50){
+        if(CurrAQI <= 50){
           level = 'good';
           description = 'Air quality is satisfactory';
-        }else if(mockAQI <= 100){
+        }else if(CurrAQI <= 100){
           level = 'moderate';
           description = 'Air quality is acceptable';
         }else{
@@ -83,12 +85,12 @@ function App() {
           description = 'Air quality is unhealthy';
         }
 
-        setAirQuality({aqi: mockAQI, description: description, level: level});
+        setAirQuality({aqi: CurrAQI, description: description, level: level});
 
         setWeather({
-          temp: Math.floor(Math.random() * 20) + 30,
-          humidity: Math.floor(Math.random() * 40) + 40,
-          windSpeed: Math.floor(Math.random() * 10) + 15
+          temp: weatherData.temp,
+          humidity: weatherData.humidity,
+          windSpeed: weatherData.windSpeed
         });
 
         const newChartData = Array.from({length: 24}, (_ , i) => ({
@@ -98,7 +100,7 @@ function App() {
 
         setChartData(newChartData);
 
-        const newRecommendation = getRecommendation(mockAQI, level);
+        const newRecommendation = getRecommendation(CurrAQI, level);
         setRecommendation(newRecommendation);
 
         setIsLoading(false);
@@ -113,9 +115,10 @@ function App() {
 
 
   //fetch data when location is available
-  useEffect(() => {
+  useEffect(  () => {
     if(location.lat && location.long){
       getAQI();
+       
     }
   },[location, getAQI]);
 
