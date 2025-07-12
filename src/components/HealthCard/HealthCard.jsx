@@ -14,7 +14,7 @@ const HealthCard = ({airQuality, isVisible}) => {
         </h3>
         
       </div>
-      <p className='text-black font-bold text-md mt-3 '>
+      <p className='text-black font-bold text-center text-md mt-3 '>
           {airQuality.description}
         </p>
       <div className='mt-5 font-bold ' >
