@@ -146,7 +146,7 @@ function App() {
           </div>
 
           <AQChart chartData={chartData} isVisible={visibleEle.has('chart')}/>
-          <Recommendation recommendaton={recommendation} isVisible={visibleEle.has('recommendation')}/>
+          <Recommendation recommendaton={recommendation} isVisible={visibleEle.has('recommendations')}/>
           <Loader isLoading={isLoading}/>
       </div>
     </div>
