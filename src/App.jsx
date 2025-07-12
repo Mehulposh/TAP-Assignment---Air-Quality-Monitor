@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { getAirQuality, getWeatherData } from './api/api';
+import { getAirQuality, getWeatherData, getHistoricalAirQuality } from './api/api';
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import useNetworkInfo from './customHooks/useNetworkInfo';
 import useGeoLocation from './customHooks/useGeoLocation';
@@ -21,6 +21,7 @@ function App() {
   const [chartData, setChartData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [recommendation, setRecommendation] = useState([]);
+  const [locationName, setLocationName] = useState('');
 
   const networkInfo = useNetworkInfo();
   const visibleEle = useIntersectionObserver();
@@ -69,15 +70,17 @@ function App() {
   const getAQI = useCallback(() => {
     BackgroundTaskScheduler(async () => {
       try {
-        //Mock data for demo
+        //fetches data 
         const CurrAQI = await getAirQuality(location.long,location.lat);
         const weatherData = await getWeatherData(location.long,location.lat);
+         
+        setLocationName(weatherData.name);
         let level, description;
 
-        if(CurrAQI <= 50){
+        if(CurrAQI <= 2){
           level = 'good';
           description = 'Air quality is satisfactory';
-        }else if(CurrAQI <= 100){
+        }else if(CurrAQI == 3){
           level = 'moderate';
           description = 'Air quality is acceptable';
         }else{
@@ -93,10 +96,12 @@ function App() {
           windSpeed: weatherData.windSpeed
         });
 
-        const newChartData = Array.from({length: 24}, (_ , i) => ({
-          hour: i,
-          aqi: Math.floor(Math.random() * 120) + 20
-        }));
+        // const newChartData = Array.from({length: 24}, (_ , i) => ({
+        //   hour: i,
+        //   aqi: Math.floor(Math.random() * 120) + 20
+        // }));
+
+        const newChartData = await getHistoricalAirQuality(location.long,location.lat);
 
         setChartData(newChartData);
 
@@ -138,7 +143,7 @@ function App() {
       <div className="container mx-auto px-4 py-8">
           <Header />
           <Network_API networkInfo={networkInfo} />
-          <Location  location={location}/>
+          <Location  location={locationName}/>
           <ErrorMessage error={error}/>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">

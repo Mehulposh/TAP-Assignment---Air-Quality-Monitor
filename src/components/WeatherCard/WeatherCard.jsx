@@ -17,7 +17,7 @@ const WeatherCard = ({weather, isVisible}) => {
         <div className='flex items-center gap-2'>
           <Thermometer className='w-4 h-4 text-red-500'/>
           <span>
-            Temperature: {weather.temp ? `${weather.temp}°C `: "--"}
+            Temperature: {weather.temp ? `${weather.temp}°F `: "--"}
           </span>
         </div>
         <div className='flex items-center gap-2'>

@@ -14,11 +14,11 @@ const AQChart = ({chartData, isVisible}) => {
       ctx.clearRect(0,0,width,height);
 
       //chart parameters
-      const margin = 40;
+      const margin = 100;
       const chartWidth = width -2 * margin;
       const chartHeight = height - 2 * margin;
-      const maxAQI = Math.max(...chartData.map(d => d.aqi));
-      const minAQI = Math.min(...chartData.map(d => d.aqi));
+      const maxAQI = 5;
+      const minAQI = 1;
       const range = maxAQI - minAQI || 1;
 
 
@@ -30,8 +30,8 @@ const AQChart = ({chartData, isVisible}) => {
       ctx.strokeStyle = '#e2e8f0';
       ctx.lineWidth = 1;
 
-      for(let i =0;i<= 5; i++){
-        const y = margin + (1 * chartHeight/ 5);
+      for(let i =0;i<= 4; i++){
+        const y = margin + (1 * chartHeight/ 4);
         ctx.beginPath();
         ctx.moveTo(margin, y);
         ctx.lineTo(width - margin, y);
@@ -68,6 +68,16 @@ const AQChart = ({chartData, isVisible}) => {
       ctx.font = '12px Arial';
       ctx.textAlign = 'center';
 
+      // Add AQI level labels
+      ctx.textAlign = 'left';
+      ctx.font = '10px Arial';
+      const aqiLabels = ['Very Poor', 'Poor', 'Moderate', 'Fair', 'Good'];
+      for(let i = 0; i <= 4; i++){
+        const y = margin + (i * chartHeight / 4);
+        const label = aqiLabels[i];
+        ctx.fillStyle = '#718096';
+        ctx.fillText(label, margin - 60, y + 4);
+      }
 
       //X-axis labels (hours)
       for(let i= 0; i < chartData.length ; i+= 4){
@@ -78,11 +88,17 @@ const AQChart = ({chartData, isVisible}) => {
 
       //Y-axis labels (AQI values)
       ctx.textAlign = 'right';
-      for(let i =0 ; i<=5; i++){
-        const y = margin + (i * chartHeight/5);
-        const value = Math.round(maxAQI - (i * range/5));
+      for(let i =0 ; i<=4; i++){
+        const y = margin + (i * chartHeight/4);
+        const value = maxAQI - i;
         ctx.fillText(value.toString(), margin - 10 , y + 4);
       }
+
+      // Add title
+      ctx.fillStyle = '#2d3748';
+      ctx.font = 'bold 14px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText('Air Quality Index (Last 24 Hours)', width / 2, 20);
     }
   },[chartData])
 
