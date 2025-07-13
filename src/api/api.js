@@ -20,7 +20,7 @@ export async function getWeatherData(long,lat){
         const data = await res.json();
         console.log(data);
         console.log({name:data.name , temp: data.main.temp, windSpeed: data.wind.speed, humidity: data.main.humidity});
-        return {name:data.name , temp: data.main.temp, windSpeed: Math.round(data.wind.speed * 3.6), humidity: data.main.humidity}
+        return {name:data.name , temp: Math.floor(data.main.temp - 273.15) , windSpeed: Math.round(data.wind.speed * 3.6), humidity: data.main.humidity}
     } catch (error) {
         console.log(error);
     }
