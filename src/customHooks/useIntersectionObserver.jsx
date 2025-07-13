@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
+//custom hook for scrolling
 const useIntersectionObserver = () => {
   const [visibleEle, setVisibleEle] = useState(new Set());
   const observerRef = useRef(null);
@@ -7,6 +8,7 @@ const useIntersectionObserver = () => {
   useEffect(() => {
     const elements = document.querySelectorAll('.fade-in');
 
+    //adding the rendered elements in ref
     observerRef.current = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if(entry.isIntersecting){
@@ -20,7 +22,8 @@ const useIntersectionObserver = () => {
         observerRef.current.observe(ele);
       }
     });
-
+    
+    //cleanup function
     return () => {
       if(observerRef.current){
         observerRef.current.disconnect();

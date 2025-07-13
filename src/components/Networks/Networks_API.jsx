@@ -5,16 +5,18 @@ const Networks_API = ({networkInfo}) => {
   return (
     <div>
       <div>
+       {/*network status  */}
         {networkInfo.online ? (
           <>
-            <Wifi className='w-5 h-5 text-green-800'/>
-            <span className='text-green-800'>
+         
+            <Wifi className='w-6 h-6 text-green-400'/>
+            <span className='text-green-400 text-xl'>
               Online
             </span>
           </>
         ) : (
           <>
-            <WifiOff className='w-5 h-5 text-red-500'/>
+            <WifiOff className='w-6 h-6 text-red-500'/>
             <span className='text-red-600'>
               Offline
             </span>
@@ -22,6 +24,7 @@ const Networks_API = ({networkInfo}) => {
         )} 
         <div className='e-3 h-3 bg-green-500 rounded-full animate-pulse'></div>
       </div>
+      {/* network details */}
       <div className='text-right'>
         <div>
           Connection: {networkInfo.type}

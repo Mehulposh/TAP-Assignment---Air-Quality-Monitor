@@ -2,15 +2,16 @@
 import React, { useEffect, useState } from 'react'
 
 const useGeoLocation = () => {
+  //state for location
   const [location , setLocation] = useState({
     lat: null,
     long: null,
-    address: 'Detecting...'
   });
 
+  //state for error
   const [error, setError] = useState(null);
   
-
+  //usseffect to fetch the coordinates of current location
   useEffect(() => {
     if('geolocation' in navigator){
       navigator.geolocation.getCurrentPosition(
@@ -20,7 +21,6 @@ const useGeoLocation = () => {
           setLocation({
             lat: latitude,
             long: longitude,
-            address: `${latitude.toFixed(4)} , ${longitude.toFixed(4)}`
           });
 
           setError(null);
@@ -32,7 +32,7 @@ const useGeoLocation = () => {
           setLocation({
             lat: 19.0760,
             long: 72.8777,
-            address: 'Mumbai, Maharashtra, India (default)'
+            
           });
         },
         {enableHighAccuracy: true, timeout: 10000, maximumAge: 300000}
@@ -42,7 +42,7 @@ const useGeoLocation = () => {
       setLocation({
             lat: 19.0760,
             long: 72.8777,
-            address: 'Mumbai, Maharashtra, India (default)'
+            
           });
     }
   },[]);

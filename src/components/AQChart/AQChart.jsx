@@ -107,6 +107,7 @@ const AQChart = ({chartData, isVisible}) => {
     <div id='chart' className= {`fade-in bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-lg mb-8 
           transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
       > 
+      {/* title */}
       <h3 className='text-xl font-semibold text-gray-800 mb-4'>
         📊 Air Quality Trends (24 Hours)
       </h3>

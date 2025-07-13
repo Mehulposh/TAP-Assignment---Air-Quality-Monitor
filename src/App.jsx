@@ -73,10 +73,12 @@ function App() {
         //fetches data 
         const CurrAQI = await getAirQuality(location.long,location.lat);
         const weatherData = await getWeatherData(location.long,location.lat);
-         
+        
+        //setting location name
         setLocationName(weatherData.name);
         let level, description;
 
+        //deciding safety level and warning
         if(CurrAQI <= 2){
           level = 'good';
           description = 'Air quality is satisfactory';
@@ -88,6 +90,7 @@ function App() {
           description = 'Air quality is unhealthy';
         }
 
+        // setting air quality data
         setAirQuality({aqi: CurrAQI, description: description, level: level});
 
         setWeather({
@@ -96,10 +99,7 @@ function App() {
           windSpeed: weatherData.windSpeed
         });
 
-        // const newChartData = Array.from({length: 24}, (_ , i) => ({
-        //   hour: i,
-        //   aqi: Math.floor(Math.random() * 120) + 20
-        // }));
+        
 
         const newChartData = await getHistoricalAirQuality(location.long,location.lat);
 

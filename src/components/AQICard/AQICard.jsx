@@ -29,13 +29,16 @@ const AQICard = ({airQuality, isVisible}) => {
         >
       <div className='flex items-center gap-3 mb-4'>
         <Wind className='h-6 w-6 text-blue-500'/>
+        {/* title */}
         <h3 className='text-lg font-semibold text-gray-800 '>
           AIR QUALITY INDEX
         </h3>
       </div>
+      {/* current aqi */}
       <div className= {`text-5xl font-bold text-center py-6 rounded-lg ${getColor(airQuality.level)} text-white`}>
         {airQuality.aqi || '--'}
       </div>
+      {/* description */}
       <p className= {`text-center font-medium ${getTextColor(airQuality.level)}`}>
         {airQuality.description}
       </p>

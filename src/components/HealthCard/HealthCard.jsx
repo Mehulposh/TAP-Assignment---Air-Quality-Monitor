@@ -8,16 +8,19 @@ const HealthCard = ({airQuality, isVisible}) => {
       isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
      >
       <div className='flex items-center gap-3 mb-4'>
+      {/* title */}
         <AlertCircle  className='w-6 h-6 text-orange-500'/>
         <h3 className='text-lg font-semibold text-gray-800'>
           Health Status
         </h3>
         
       </div>
+      {/* description */}
       <p className='text-black font-bold  text-md mt-3 '>
           {airQuality.description}
         </p>
       <div className='mt-5 font-bold ' >
+      {/* warning */}
         {airQuality.level === 'good' && (
           <div className='flex items-center gap-2 text-green-600' >
             <CheckCircle className='w-5 h-5' />

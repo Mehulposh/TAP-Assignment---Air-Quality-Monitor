@@ -7,10 +7,12 @@ const Recommendaton = ({recommendaton , isVisible}) => {
     <div id='recommendations' className={`fade-in bg-white/90 backdrop-blur-sm  rounded-xl p-6 shadow-lg transition-all duration-500
           ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
       >
+      {/* title */}
       <h3 className='text-xl text-black font-semibold text-shadow-gray-800 mb-4'>
         💡 Task Recommendation 
       </h3>
 
+      {/* list of recommendations */}
       <ul className='space-y-3'>
         {recommendaton.map((item,idx) => (
           <li 

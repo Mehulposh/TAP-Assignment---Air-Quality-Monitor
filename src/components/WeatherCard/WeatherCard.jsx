@@ -9,23 +9,27 @@ const WeatherCard = ({weather, isVisible}) => {
       >
       <div className='flex items-center gap-3 mb-4'>
         <Activity className='w-6 h-6 text-gray-500'/>
+        {/* weather heading */}
         <h3 className='text-lg font-semibold text-gray-800'>
           Weather Conditions
         </h3>
       </div>
       <div className='space-y-3 text-gray-700'>
+      {/* temperature */}
         <div className='flex items-center gap-2'>
           <Thermometer className='w-4 h-4 text-red-500'/>
           <span>
             Temperature: {weather.temp ? `${weather.temp}°C `: "--"}
           </span>
         </div>
+        {/* humidity */}
         <div className='flex items-center gap-2'>
           <Droplet className='w-4 h-4 text-gray-500'/>
           <span>
             Himidity: {weather.humidity ? `${weather.humidity}%`: "--"}
           </span>
         </div>
+        {/* windSpeed */}
         <div className='flex items-center gap-2'>
           <Wind className='w-4 h-4 text-gray-500'/>
           <span>
